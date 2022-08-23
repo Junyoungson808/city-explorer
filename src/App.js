@@ -9,6 +9,8 @@ class App extends React.Component {
       pokemonData: [],
       city: "",
       cityData: [],
+      error: false,
+      errorMessage: "",
       // searchResult: null,
       // searchQuery: "",
       // mapURL: "",
@@ -36,12 +38,21 @@ class App extends React.Component {
   handleGetPokemon = async (e) => {
     e.preventDefault();
     // first axios call-url
-    let pokemonData = await axios.get("https://pokeapi.co/api/v2/pokemon");
-    // proof of life
-    console.log(pokemonData.data.results);
-    this.setState({
-      pokemonData: pokemonData.data.results,
-    });
+    try {
+      let pokemonData = await axios.get("https://pokeapi.co/api/v2/pokemon");
+
+      // proof of life
+      // console.log(pokemonData.data.results);
+      this.setState({
+        pokemonData: pokemonData.data.results,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        error: true,
+        errorMessage: error.message,
+      });
+    }
   };
 
   render() {
@@ -68,7 +79,11 @@ class App extends React.Component {
           <button type="submit">Explore!</button>
         </form>
 
-        <ul>{pokemonItems}</ul>
+        {this.state.errorMessage ? (
+          <p>{this.state.errorMessage}</p>
+        ) : (
+          <ul>{pokemonItems}</ul>
+        )}
       </>
     );
   }
