@@ -1,16 +1,16 @@
-import React from "react";
-import axios from "axios";
-import "./App.css";
+import React from 'react';
+import axios from 'axios';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       pokemonData: [],
-      city: "",
+      city: '',
       cityData: [],
       error: false,
-      errorMessage: "",
+      errorMessage: '',
       // searchResult: null,
       // searchQuery: "",
       // mapURL: "",
@@ -39,7 +39,7 @@ class App extends React.Component {
     e.preventDefault();
     // first axios call-url
     try {
-      let pokemonData = await axios.get("https://pokeapi.co/api/v2/pokemon");
+      let pokemonData = await axios.get('https://pokeapi.co/api/v2/pokemon');
 
       // proof of life
       // console.log(pokemonData.data.results);
@@ -56,7 +56,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log("app.state: ", this.state);
+    console.log('app.state: ', this.state);
 
     let pokemonItems = this.state.pokemonData.map((pokemon, index) => {
       return <li key={index}>{pokemon.name}</li>;
@@ -72,7 +72,6 @@ class App extends React.Component {
 
         <form onSubmit={this.getCityData}>
           <label>
-            {" "}
             Pick a City!
             <input type="text" onInput={this.handleInput} />
           </label>

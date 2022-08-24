@@ -21,8 +21,6 @@ Finish time: _N/A_
 
 Actual time needed to complete: _____
 
-
-
 # City-Exploerer
 
 **Author**: Junyoung Son
