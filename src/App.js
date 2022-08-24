@@ -1,23 +1,22 @@
-import React from 'react';
-import axios from 'axios';
-import './App.css';
+import React from "react";
+import axios from "axios";
+import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       pokemonData: [],
-      city: '',
+      city: "",
       cityData: [],
+      cityLon: "",
+      cityLat: "",
       error: false,
-      errorMessage: '',
-      // searchResult: null,
-      // searchQuery: "",
-      // mapURL: "",
-      // Error: false,
+      errorMessage: "",
     };
   }
 
+  // City Data handlers
   handleInput = (e) => {
     e.preventDefault();
     this.setState({
@@ -32,31 +31,34 @@ class App extends React.Component {
 
     let cityData = await axios.get(url);
 
+    let cityMap = ``;
+
     console.log(cityData.data[0]);
+    console.log(cityData);
   };
 
-  handleGetPokemon = async (e) => {
-    e.preventDefault();
-    // first axios call-url
-    try {
-      let pokemonData = await axios.get('https://pokeapi.co/api/v2/pokemon');
+  // handleGetPokemon = async (e) => {
+  //   e.preventDefault();
+  //   // first axios call-url
+  //   try {
+  //     let pokemonData = await axios.get("https://pokeapi.co/api/v2/pokemon");
 
-      // proof of life
-      // console.log(pokemonData.data.results);
-      this.setState({
-        pokemonData: pokemonData.data.results,
-      });
-    } catch (error) {
-      console.log(error);
-      this.setState({
-        error: true,
-        errorMessage: error.message,
-      });
-    }
-  };
+  //     // proof of life
+  //     // console.log(pokemonData.data.results);
+  //     this.setState({
+  //       pokemonData: pokemonData.data.results,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     this.setState({
+  //       error: true,
+  //       errorMessage: error.message,
+  //     });
+  //   }
+  // };
 
   render() {
-    console.log('app.state: ', this.state);
+    console.log("app.state: ", this.state);
 
     let pokemonItems = this.state.pokemonData.map((pokemon, index) => {
       return <li key={index}>{pokemon.name}</li>;
