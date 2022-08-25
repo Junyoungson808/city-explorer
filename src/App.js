@@ -16,6 +16,7 @@ class App extends React.Component {
       cityLon: "",
       displayName: "",
       displayMap: "",
+      display: "",
       error: false,
       errorMessage: "",
     };
@@ -26,6 +27,7 @@ class App extends React.Component {
     e.preventDefault();
     this.setState({
       city: e.target.value,
+      display: false,
     });
   };
 
@@ -76,7 +78,7 @@ class App extends React.Component {
           <Button type="submit">Explore!</Button>
         </Form>
 
-        <Card style={{ width: "22rem" }}>
+        <Card style={{ width: "22rem" }} onClick>
           <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityLat},${this.state.cityLon}&zoom=14&size=500x600`} />
           <Card.Body>
             <Card.Title>City Explorer</Card.Title>
