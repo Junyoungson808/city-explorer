@@ -12,9 +12,11 @@ class App extends React.Component {
     this.state = {
       city: "",
       cityData: [],
-      cityLon: "",
       cityLat: "",
+      cityLon: "",
       displayName: "",
+      displayMap: "",
+      display: "",
       error: false,
       errorMessage: "",
     };
@@ -25,6 +27,7 @@ class App extends React.Component {
     e.preventDefault();
     this.setState({
       city: e.target.value,
+      display: false,
     });
   };
 
@@ -35,17 +38,19 @@ class App extends React.Component {
 
     let cityData = await axios.get(url);
 
-    let cityMap = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityLat},${this.state.cityLon}&zoom=14&size=400x400`;
+    let cityMap = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityLat},${this.state.cityLon}&zoom=10`;
     console.log("MapMapMap", cityData.data);
 
+    // let weatherURL = `${process.env.REACT_APP_SERVER}/weather?city=${this.state.city}`;
+    // let weatherData = await axios.get(weatherURL)
 
     // console.log(cityData.data[0]);
     // console.log(cityData);
 
     this.setState({
       displayName: cityData.data[0].display_name,
-      cityLon: cityData.data[0].lon,
       cityLat: cityData.data[0].lat,
+      cityLon: cityData.data[0].lon,
       displayMap: cityMap,
     });
   };
@@ -65,36 +70,26 @@ class App extends React.Component {
     console.log("app.state: ", this.state);
     return (
       <>
-        {/* <form onSubmit={this.getCityData}>
-          <label>
-            Pick a City!
-            <input type="text" onInput={this.handleInput} />
-          </label>
-          <button type="submit">Explore!</button>
-        </form> */}
 
         <Form onSubmit={this.getCityData}>
           <Form.Label>
-            Pick a City!
-            <input type="text" onInput={this.handleInput} />
+            <input placeholder="Pick a City!" type="text" onInput={this.handleInput} />
           </Form.Label>
           <Button type="submit">Explore!</Button>
         </Form>
 
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={this.image} />
+        <Card style={{ width: "22rem" }} onClick>
+          <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityLat},${this.state.cityLon}&zoom=14&size=500x600`} />
           <Card.Body>
-            <Card.Title>{this.state.displayName}</Card.Title>
+            <Card.Title>City Explorer</Card.Title>
             <Card.Text>
-              <ul>{this.state.displayName}</ul>
-              <ul>{this.state.cityLon}</ul>
-              <ul>{this.state.cityLat}</ul>
+              <div>City: {this.state.displayName} </div>
+              <div>Latitude: {this.state.cityLat}</div>
+              <div>Longitude: {this.state.cityLon}</div>
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
           </Card.Body>
         </Card>
 
-        {/* {this.state.errorMessage ? <p>{this.state.errorMessage}</p> : <ul></ul>} */}
       </>
     );
   }
