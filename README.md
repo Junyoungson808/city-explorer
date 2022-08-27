@@ -1,4 +1,8 @@
+![netlify](https://6309b4ebfbefa93b2ac79d72--spectacular-croquembouche-860743.netlify.app/)
+![heroku](https://weather-app-apiii.herokuapp.com/)
+
 ### Time Estimates
+
 For each of the lab features, make an estimate of the time it will take you to complete the feature, and record your start and finish times for that feature:
 
 Name of feature: __Lab-06:_City-Explorer__
@@ -25,8 +29,6 @@ Actual time needed to complete: _____
 
 **Author**: Junyoung Son
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
-[netlify](https://chimerical-macaron-5cd1fe.netlify.app/)
-[axios]()
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
